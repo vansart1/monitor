@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Script to monitor server performance and send alert when needed
-# Written by Victor Ansart Oct 2018
+# Written by Victor Ansart May 2018
 
 ###########-variables-##########
 
@@ -279,7 +279,7 @@ do
 		if [[ $previous_notification_level -lt $alert_level ]] || [[ $(($current_time - $last_alert_time)) -gt $(($alert_time_interval * 60 * 60)) ]]
 		then
 			html_message=${message//'\n'/'<br>'}  #replace newline with <br> for html
-			#send email
+			myemail "$sendAddress" "$subject" "$html_message" 
 			last_alert_time=$current_time     #set last_alert_time so alert not sent so soon again
 		fi
 	elif [[ $notification_level -ge $warn_level ]] #send warning notification
@@ -292,7 +292,7 @@ do
 		if [[ $(($current_time - $last_alert_time)) -gt $(($alert_time_interval * 60 *60)) ]]   #if last alert is later than alert_time_interval
 		then
 			html_message=${message//'\n'/'<br>'}   #replace newline with <br> for html
-			#send email
+			myemail "$sendAddress" "$subject" "$html_message" 
 			last_alert_time=$current_time     #set last_alert_time so alert not sent so soon again
 		fi
 	fi
