@@ -22,4 +22,7 @@ To install:
 2) cp monitor.conf /usr/local/etc/monitor/monitor.conf
 3) cp myemail.py /usr/local/bin/myemail
 4) cp myemail_conf.ini /usr/local/etc/myemail_conf.ini
+5) cp keep_alive.sh /usr/local/bin/keep_alive
+6) Add to crontab "@reboot /usr/local/bin/monitor > /dev/null
+7) Add to crontab "0 */1 * * * /usr/local/bin/keep_alive /usr/local/bin/monitor
 
